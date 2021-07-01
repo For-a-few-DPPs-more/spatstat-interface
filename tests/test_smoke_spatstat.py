@@ -1,8 +1,6 @@
 from spatstat_interface.interface import SpatstatInterface
 
 
-def test_smoke_spatstat():
-    print("smoke-before")
+def test_install_spatstat():
     spatstat = SpatstatInterface(update=True)
-    assert False
-    print("smoke-after")
+    assert True
