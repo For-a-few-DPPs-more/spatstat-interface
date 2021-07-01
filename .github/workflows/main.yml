@@ -28,11 +28,12 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: "4.1.0"
-      - name: install python
+      - name: get python version, upgrade pip, install pytest and get pytest version
         run: |
           python --version
           python -m pip install --upgrade pip
           pip install pytest
+          pytest --version
       - name: install project
         run: |
           pip install .
