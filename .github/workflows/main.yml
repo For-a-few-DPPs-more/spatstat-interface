@@ -40,4 +40,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Test with pytest
-        run: python tests/main.py
+        # run: python tests/main.py
+        run: pytest -vvvv tests/test_smoke_spatstat.py
