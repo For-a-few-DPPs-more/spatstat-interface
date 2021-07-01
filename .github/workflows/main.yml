@@ -26,8 +26,10 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v2
 
-      - name: Install Python and upgrade pip
+      - name: Install Python
         uses: actions/setup-python@v2
+
+      - name: Get Python version and upgrade pip
         run: |
           python --version
           python -m pip install --upgrade pip
