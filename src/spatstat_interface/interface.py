@@ -19,7 +19,7 @@ class SpatstatInterface:
 
             :py:meth:`SpatstatInterface.import_package`
         """
-        # install_r_package("spatstat", update=update)
+        install_r_package("spatstat", update=update)
         for pkg in self.SUBPACKAGES + self.EXTENSIONS:
             setattr(self, pkg, None)
 
