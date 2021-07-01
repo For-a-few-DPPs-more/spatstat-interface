@@ -1,7 +1,7 @@
 import rpy2.robjects.packages as rpackages
 from spatstat_interface.utils import install_r_package
 
-# todo: add version argument
+
 class SpatstatInterface:
     """See also https://github.com/spatstat/spatstat"""
 
@@ -10,14 +10,15 @@ class SpatstatInterface:
 
     def __init__(self, update=True):
         """Construct an interface with ``spatstat`` R package `github.com/spatstat <https://github.com/spatstat/spatstat>`_.
-        If ``spatstat`` is already installed is it updated according to ``update`` otherwise it is installed.
+        If ``spatstat`` is already installed it is updated (latest version) according to ``update``, otherwise it installed (latest version).
 
-        :param update: Install latest version of ``spatstat`` (internet access required), defaults to True
+        :param update: trigger installation of the latest version of ``spatstat`` (internet access required), defaults to True
         :type update: bool, optional
 
         .. seealso::
 
             :py:meth:`SpatstatInterface.import_package`
+            :py:func:`utils.install_r_package`
         """
         install_r_package("spatstat", update=update)
         for pkg in self.SUBPACKAGES + self.EXTENSIONS:
@@ -53,7 +54,9 @@ class SpatstatInterface:
 
         .. seealso::
 
-            The list of subpackages and extensions is available at `github.com/spatstat <https://github.com/spatstat/spatstat>`_
+            The list of subpackages and extensions is available
+            - via the ``SUBPACKAGES`` and ``EXTENSIONS`` attributes
+            - at `github.com/spatstat <https://github.com/spatstat/spatstat>`_
         """
         wrong_names = set(names).difference(self.SUBPACKAGES + self.EXTENSIONS)
         if wrong_names:

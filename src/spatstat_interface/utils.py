@@ -5,6 +5,18 @@ from rpy2.robjects.conversion import localconverter
 
 
 def install_r_package(*names, update=True):
+    """Install ``R`` package(s) passed via ``names``.
+    If the corresponding package(s) is already installed it is updated (latest version) according to ``update``, otherwise it installed (latest version).
+
+    .. code-block:: python
+
+        install_r_package("spatstat", ..., update=True)
+
+    :param update: trigger installation of the latest version of the package, defaults to True
+    :type update: bool, optional
+    """
+    # todo: pass version argument
+    # ? seems that it is not possible using utils, maybe try with
     utils = rpackages.importr("utils")
     for name in names:
         if rpackages.isinstalled(name) and not update:
