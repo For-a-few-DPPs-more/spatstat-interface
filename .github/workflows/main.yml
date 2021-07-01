@@ -38,5 +38,5 @@ jobs:
           pip install .
 
       # Runs a single command using the runners shell
-      - name: smoke test
+      - name: Test with pytest
         run: pytest tests/test_smoke_spatstat.py
