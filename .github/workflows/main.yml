@@ -39,4 +39,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: smoke test
-        run: pytest
+        run: pytest tests/test_smoke_spatstat.py
