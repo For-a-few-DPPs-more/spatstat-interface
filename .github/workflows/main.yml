@@ -39,16 +39,16 @@ jobs:
         with:
           r-version: "4.1.0"
 
-      # - name: Install project and dependencies
-      #   # see pyproject.toml file
-      #   run: |
-      #     pip install .
+      - name: Install project and dependencies
+        # see pyproject.toml file
+        run: |
+          pip install .
 
-      - name: Install pytest and codecov
+      - name: Install pytest
         run: |
           pip install pytest
           pytest --version
-          pip install pytest-cov codecov
+          pip install pytest-cov
 
       - name: Run tests, generate coverage report
         run: |
