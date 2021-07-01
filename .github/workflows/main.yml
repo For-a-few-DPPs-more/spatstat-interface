@@ -46,7 +46,7 @@ jobs:
 
       - name: Install pytest
         run: |
-          pip install pytest
+          pip install pytest pytest-cov
           pytest --version
 
       - name: Run tests
