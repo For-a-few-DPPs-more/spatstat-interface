@@ -51,4 +51,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest -vv tests/test_smoke_spatstat.py
+          pytest -vv --cov=spatstat_interface --cov-report=term-missing
