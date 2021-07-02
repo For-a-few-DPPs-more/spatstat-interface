@@ -25,6 +25,7 @@ pytest = "^6.2.4"
 pytest-cov = "^2.12.1"
 black = "^21.6b0"
 pylint = "^2.8.3"
+coverage = { version="^5.5", extras=["toml"] }
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -35,3 +36,16 @@ build-backend = "poetry.core.masonry.api"
 minversion = "6.0"
 addopts = "-ra -q"
 testpaths = ["tests"]
+
+[tool.coverage.paths]
+source = ["src"]
+
+[tool.coverage.run]
+parallel = true
+branch = true
+source = ["spatstat_interface"]
+omit = [".venv/*"]
+
+[tool.coverage.report]
+show_missing = true
+omit = [".venv/*", "tests/*"]
