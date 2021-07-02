@@ -40,7 +40,6 @@ testpaths = ["tests"]
 parallel = true
 branch = true
 source = ["spatstat_interface"]
-omit = ["*site-packages*"]
 
 [tool.coverage.report]
 show_missing = true
