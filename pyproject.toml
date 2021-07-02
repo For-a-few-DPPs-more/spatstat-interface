@@ -39,7 +39,6 @@ testpaths = ["tests"]
 [tool.coverage.run]
 parallel = true
 branch = true
-# source = ["spatstat_interface"]
 
 # [tool.coverage.report]
 # show_missing = true
