@@ -3,7 +3,6 @@ import pytest
 import numpy as np
 import pandas as pd
 import rpy2.robjects as robjects
-from rpy2.robjects import numpy2ri
 
 from spatstat_interface.interface import SpatstatInterface
 from spatstat_interface.utils import convert_r_df_to_pandas_df
