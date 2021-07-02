@@ -1,9 +1,31 @@
 [tool.poetry]
 name = "spatstat-interface"
-version = "0.1.0"
+version = "0.1.0-alpha"
 description = "Simple Python interface with the spatstat R package using rpy2"
-authors = ["Guillaume Gautier <guillaume.gga@gmail.com>"]
 license = "MIT"
+authors = ["Guillaume Gautier <guillaume.gga@gmail.com>"]
+maintainers = ["Guillaume Gautier <guillaume.gga@gmail.com>"]
+readme = "README.md" # path to README file (.md or .rst)
+homepage = "https://github.com/For-a-few-DPPs-more/spatstat-interface" # url
+repository = "https://github.com/For-a-few-DPPs-more/spatstat-interface" # url
+documentation = "https://github.com/For-a-few-DPPs-more/spatstat-interface" # url
+keywords = [
+    "spatial statistics",
+    "point processes",
+    "python",
+    "R",
+] # ["optimization", "gradrient descent"] at most 5 keywords
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: R",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Mathematics",
+] # https://pypi.org/classifiers/
+packages = []
 
 [tool.poetry.dependencies]
 python = "^3.8"
