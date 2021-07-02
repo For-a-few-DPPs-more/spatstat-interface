@@ -42,4 +42,4 @@ source = ["src", "*/site-packages"]
 [tool.coverage.run]
 parallel = true
 branch = true
-source = ["structure_factor"]
+source = ["spatstat_interface"]

@@ -53,8 +53,10 @@ jobs:
       - name: Run tests, generate coverage report
         run: |
           pytest -vv --cov=./ --cov-report=xml
+          cat ./coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
