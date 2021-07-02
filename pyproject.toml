@@ -35,11 +35,3 @@ build-backend = "poetry.core.masonry.api"
 minversion = "6.0"
 addopts = "-ra -q"
 testpaths = ["tests"]
-
-[tool.coverage.paths]
-source = ["src", "*/site-packages"]
-
-[tool.coverage.run]
-parallel = true
-branch = true
-source = ["spatstat_interface"]
