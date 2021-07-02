@@ -16,7 +16,7 @@ def spatstat():
 
 
 def test_spatstat_ppp_to_pandas_df(spatstat):
-    B = [0, 2]
+    B = [0, 1]
     bound_r = robjects.FloatVector(B)
     window = spatstat.geom.owin(xrange=bound_r, yrange=bound_r)
 
@@ -32,7 +32,7 @@ def test_spatstat_ppp_to_pandas_df(spatstat):
 def test_simulate_dpp_gaussian(spatstat):
     params = {"lambda": 100, "alpha": 0.05, "d": 2}
     my_dpp = spatstat.core.dppGauss(**params)
-    bound = robjects.FloatVector([0, 2])
+    bound = robjects.FloatVector([0, 1])
     window = spatstat.geom.owin(xrange=bound, yrange=bound)
 
     spatstat.core.simulate_dppm(my_dpp, W=window)

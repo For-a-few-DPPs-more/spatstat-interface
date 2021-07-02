@@ -1,9 +1,0 @@
-[run]
-omit =
-  *site-packages*
-  tests/*
-
-[report]
-omit =
-  *site-packages*
-  tests/*
