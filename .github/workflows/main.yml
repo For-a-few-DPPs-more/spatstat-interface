@@ -48,7 +48,7 @@ jobs:
         # https://www.willprice.dev/2019/01/03/python-code-coverage.html
         run: |
           pip install pytest pytest-cov
-          PYTHONPATH=src pytest -vvvv --cov=spatstat_interface --cov-report=xml
+          pytest -vvvv --cov=spatstat_interface --cov-report=xml
           cat ./coverage.xml
 
       - name: Upload coverage to Codecov
