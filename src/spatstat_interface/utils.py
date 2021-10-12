@@ -15,8 +15,6 @@ def install_r_package(*names, update=True):
     :param update: trigger installation of the latest version of the package, defaults to True
     :type update: bool, optional
     """
-    # todo: pass version argument
-    # ? seems that it is not possible using utils, maybe try with
     utils = rpackages.importr("utils")
     for name in names:
         if rpackages.isinstalled(name) and not update:
@@ -26,12 +24,12 @@ def install_r_package(*names, update=True):
         utils.install_packages(name)
 
 
-def convert_r_df_to_pandas_df(r_df):
+def to_pandas_data_frame(r_data_frame):
     """`Convert R DataFrame to pandas DataFrame using rpy2 <https://rpy2.github.io/doc/latest/html/pandas.html>`_
 
-    :param r_df: R DataFrame
-    :return: pandas DataFrame created from ``r_df``
+    :param r_data_frame: R DataFrame
+    :return: pandas DataFrame created from ``r_data_frame``
     """
     with localconverter(robjects.default_converter + pandas2ri.converter):
-        pandas_df = robjects.conversion.rpy2py(r_df)
+        pandas_df = robjects.conversion.rpy2py(r_data_frame)
         return pandas_df

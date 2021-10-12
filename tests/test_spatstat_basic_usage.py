@@ -1,17 +1,16 @@
-import pytest
-
 import numpy as np
 import pandas as pd
+import pytest
 import rpy2.robjects as robjects
 
 from spatstat_interface.interface import SpatstatInterface
-from spatstat_interface.utils import convert_r_df_to_pandas_df
+from spatstat_interface.utils import to_pandas_data_frame
 
 
 @pytest.fixture
 def spatstat():
     spatstat = SpatstatInterface(update=True)
-    spatstat.import_package("core", "geom", update=False)
+    spatstat.import_package("core", "geom", update=True)
     return spatstat
 
 
@@ -25,7 +24,7 @@ def test_spatstat_ppp_to_pandas_df(spatstat):
     points_ppp = spatstat.geom.ppp(X, X, window=window)
     pcf_ppp = spatstat.core.pcf_ppp(points_ppp)
 
-    pcf_pd = convert_r_df_to_pandas_df(pcf_ppp)
+    pcf_pd = to_pandas_data_frame(pcf_ppp)
     assert isinstance(pcf_pd, pd.DataFrame)
 
 
