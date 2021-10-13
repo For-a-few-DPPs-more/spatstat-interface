@@ -92,22 +92,74 @@ Alternatives
 
 ## Documentation
 
-- [notebooks](https://github.com/For-a-few-DPPs-more/spatstat-interface/blob/main/notebooks) for detailed examples
-- [rpy2 documentation](https://rpy2.github.io/doc.html)
-- [spatstat documentation](https://rdocumentation.org/search?q=spatstat)
+### Main ressources
 
-The [spatstat](https://github.com/spatstat/spatstat) package has recently been split into multiple subpackages and extensions.
+- [`notebooks`](./notebooks) for detailed examples
+- [`rpy2` documentation](https://rpy2.github.io/doc.html)
+- [`spatstat` documentation](https://rdocumentation.org/search?q=spatstat)
 
-Using `spatstat-interface` , subpackages and extensions are accessible in the following way
+### Notes about `spatstat`
+
+The [`spatstat`](https://github.com/spatstat/spatstat) package has recently been split into multiple sub-packages and extensions.
+
+Using `spatstat-interface`, sub-packages and extensions are accessible in the following way
 
 ```python
 from spatstat_interface import SpatstatInterface
+
 spatstat = SpatstatInterface(update=True)
 # spatstat.core is None
 # spatstat.geom is None
 
-# load/import subpackages or extensions
-spatstat.import_package("core", "geom", update=False)
+# load/import sub-packages or extensions
+spatstat.import_package("core", "geom", update=True)
 spatstat.core
 spatstat.geom
 ```
+
+### Notes about calling functions
+
+#### Calling R dot functions
+
+Instead of calling `function.subfunction` as in R replace `.` by `_` in Python.
+
+```R
+# R code pcf.ppp
+spatstat.core::pcf.ppp(X)
+```
+
+```Python
+# Python code pcf_ppp
+my_dpp = spatstat.core.pcf_ppp(X)
+```
+
+#### Using keywords arguments
+
+Consider using Python dictionaries to pass keyword arguments.
+Below are a few examples.
+
+- dot keywords, for example passing `var.approx` keyword won't work in Python
+
+  ```R
+  # R code
+  spatstat.core::pcf.ppp(X, kernel="epanechnikov", var.approx=False)
+  ```
+
+  ```Python
+  # Python code
+  params = {"kernel": "epanechnikov", "var.approx": False}
+  my_dpp = spatstat.core.pcf_pp(X, **params)
+  ```
+
+- reserved keywords, for example `lambda` is a reserved Python keyword
+
+  ```R
+  # R code
+  spatstat.core::dppGauss(lambda=rho, alpha=alpha, d=d)
+  ```
+
+  ```Python
+  # Python code
+  params = {"lambda": rho, "alpha": alpha, "d": d}
+  my_dpp = spatstat.core.dppGauss(**params)
+  ```
