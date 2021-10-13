@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "spatstat-interface"
-version = "0.1.0-alpha"
+version = "0.1.0-alpha.1"
 description = "Simple Python interface with the spatstat R package using rpy2"
 license = "MIT"
 authors = ["Guillaume Gautier <guillaume.gga@gmail.com>"]
@@ -53,6 +53,11 @@ isort = "^5.9.3"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+# For editable install using pip install -e .
+# comment "requires" and "build-backend" above
+# uncomment "requires" and "build-backend" below
+# requires = ["setuptools >= 40.9.0", "wheel"]
+# build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
 # poetry run pytest
