@@ -5,14 +5,28 @@
 [![codecov](https://codecov.io/gh/For-a-few-DPPs-more/spatstat-interface/branch/main/graph/badge.svg?token=BHTI6L66P2)](https://codecov.io/gh/For-a-few-DPPs-more/spatstat-interface)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
+- [spatstat-interface](#spatstat-interface)
+  - [Dependencies](#dependencies)
+  - [Installation](#installation)
+    - [Install the project as a dependency](#install-the-project-as-a-dependency)
+    - [Install in editable mode and potentially contribute to the project](#install-in-editable-mode-and-potentially-contribute-to-the-project)
+      - [Using `poetry`](#using-poetry)
+      - [Using `pip`](#using-pip)
+  - [Documentation](#documentation)
+    - [Main ressources](#main-ressources)
+    - [Notes about `spatstat`](#notes-about-spatstat)
+    - [Notes about calling functions](#notes-about-calling-functions)
+      - [Calling function.variant](#calling-functionvariant)
+      - [Using keyword arguments](#using-keyword-arguments)
+
 Simple Python interface with the spatial statistics [R](https://www.r-project.org/) package [`spatstat`](https://github.com/spatstat/spatstat) using [`rpy2`](https://github.com/rpy2/rpy2).
 
-## Dependecies
+## Dependencies
 
 - [R](https://www.r-project.org/) (programming language),
 - Python dependencies are listed in the [`pyproject.toml`](./pyproject.toml) file. Note that they mostly correspond to the latest version.
 
-  ```bash
+  ```toml
   [tool.poetry.dependencies]
   python = "^3.8"
 
@@ -44,17 +58,23 @@ You may consider using `poetry` to manage your whole project as described here <
   # pip install git+https://github.com/For-a-few-DPPs-more/spatstat-interface.git
   ```
 
-  or
+### Install in editable mode and potentially contribute to the project
+
+You may consider [forking the repository](https://github.com/For-a-few-DPPs-more/spatstat-interface/fork).
+
+In any case, your can clone the repository
+
+- if you have forked the repository
+
+  ```bash
+  git clone https://github.com/your_user_name/spatstat-interface.git
+  ```
+
+- if you have **not** forked the repository
 
   ```bash
   git clone https://github.com/For-a-few-DPPs-more/spatstat-interface.git
-  cd spatstat-interface
-  # activate your virtual environment an run
-  poetry install --no-dev
-  # pip install .
   ```
-
-### Install in editable mode and potentially contribute to the project
 
 #### Using `poetry`
 
@@ -64,10 +84,11 @@ The package can be installed in **editable** mode along with
 - development dependencies, `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](./pyproject.toml)
 
 ```bash
-git clone https://github.com/For-a-few-DPPs-more/spatstat-interface.git
 cd spatstat-interface
-poetry shell  # create/activate local .venv (see poetry.toml)
+# activate your virtual environment or run
+# poetry shell  # to create/activate local .venv (see poetry.toml)
 poetry install
+# poetry install --no-dev  # to avoid installing the development dependencies
 ```
 
 #### Using `pip`
@@ -76,25 +97,31 @@ For now, packages defined only by a [`pyproject.toml`](./pyproject.toml) file **
 
 Alternatives
 
-- consider installing the package [using `poetry` instead](#using-poetry)
+1. consider [using `poetry` instead](#using-poetry)
 
-- otherwise, for your convenience, the [`pyproject.toml`](./pyproject.toml) file was duplicated into a [`setup.cfg`](./setup.cfg) file to enable editable install using `pip`.
+2. otherwise, for your convenience, the [`pyproject.toml`](./pyproject.toml) file was duplicated into a [`setup.cfg`](./setup.cfg) file to enable editable install using `pip`.
 
-  1. modify the `[build-system]` section in [`pyproject.toml`](./pyproject.toml) to
+   - modify the `[build-system]` section in [`pyproject.toml`](./pyproject.toml) to
 
-      ```language
+      ```toml
       [build-system]
       requires = ["setuptools >= 40.9.0", "wheel"]
       build-backend = "setuptools.build_meta"
       ```
 
-  2. run `pip install -e .`
+   - intstall the project in editable mode
+
+      ```bash
+      cd spatstat-interface
+      # activate your virtual environment and run
+      pip install -e .
+      ```
 
 ## Documentation
 
 ### Main ressources
 
-- [`notebooks`](./notebooks) for detailed examples
+- [`notebooks`](./notebooks) showcase detailed examples
 - [`rpy2` documentation](https://rpy2.github.io/doc.html)
 - [`spatstat` documentation](https://rdocumentation.org/search?q=spatstat)
 
@@ -119,9 +146,9 @@ spatstat.geom
 
 ### Notes about calling functions
 
-#### Calling R dot functions
+#### Calling function.variant
 
-Instead of calling `function.subfunction` as in R replace `.` by `_` in Python.
+Instead of calling `function.variant` as in R replace `.` by `_` in Python.
 
 ```R
 # R code pcf.ppp
@@ -133,12 +160,12 @@ spatstat.core::pcf.ppp(X)
 my_dpp = spatstat.core.pcf_ppp(X)
 ```
 
-#### Using keywords arguments
+#### Using keyword arguments
 
 Consider using Python dictionaries to pass keyword arguments.
 Below are a few examples.
 
-- dot keywords, for example passing `var.approx` keyword won't work in Python
+- dot keywords, for example passing `var.approx` keyword argument won't work in Python
 
   ```R
   # R code
@@ -151,7 +178,7 @@ Below are a few examples.
   my_dpp = spatstat.core.pcf_pp(X, **params)
   ```
 
-- reserved keywords, for example `lambda` is a reserved Python keyword
+- reserved keywords, for example `lambda` is a reserved Python keyword ; it can't be used as a keyword argument
 
   ```R
   # R code
