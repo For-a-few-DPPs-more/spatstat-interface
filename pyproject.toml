@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "spatstat-interface"
-version = "0.1.0"
+version = "0.1.1"
 description = "Simple Python interface with the spatstat R package using rpy2"
 license = "MIT"
 authors = ["Guillaume Gautier <guillaume.gga@gmail.com>"]
@@ -29,7 +29,7 @@ classifiers = [
 packages = []
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7.1"
 
 matplotlib = "^3.4.2"
 numpy = "^1.20.3"
