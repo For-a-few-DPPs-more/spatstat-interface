@@ -4,42 +4,50 @@ from spatstat_interface.utils import install_r_package
 
 
 class SpatstatInterface:
-    """See also https://github.com/spatstat/spatstat"""
+    """Interface the ``spatstat`` R package, subpackages and extensions `github.com/spatstat <https://github.com/spatstat/spatstat>`_ using `rpy2 <https://rpy2.github.io>`_.
+
+    Attributes are associated to the corresponding subpackages and extensions.
+
+    .. code-block:: python
+
+        spatstat = SpatstatInterface(update=True)
+        # spatstat.core is None
+        # spatstat.geom is None
+        # ...
+
+    See :py:meth:`~spatstat_interface.interface.SpatstatInterface.import_package` to load/import the corresponding subpackages/extensions.
+    """
 
     SUBPACKAGES = ("core", "data", "geom", "linnet", "sparse", "spatstat", "utils")
     EXTENSIONS = ("gui", "Knet", "local", "sphere")
 
     def __init__(self, update=True):
-        """Construct an interface with ``spatstat`` R package `github.com/spatstat <https://github.com/spatstat/spatstat>`_.
-        If ``spatstat`` is already installed it is updated (latest version) according to ``update``, otherwise it installed (latest version).
-
-        :param update: trigger installation of the latest version of ``spatstat`` (internet access required), defaults to True
-        :type update: bool, optional
-
-        .. seealso::
-
-            :py:meth:`SpatstatInterface.import_package`
-            :py:func:`utils.install_r_package`
+        """Construct an interface with the ``spatstat`` R package `github.com/spatstat <https://github.com/spatstat/spatstat>`_.
+        If ``spatstat`` is already installed it is updated (latest version) according to ``update``, otherwise it is installed (latest version).
         """
         install_r_package("spatstat", update=update)
         for pkg in self.SUBPACKAGES + self.EXTENSIONS:
             setattr(self, pkg, None)
 
     def import_package(self, *names, update=True):
-        """Import spatstat subpackages or extensions given by ``names``, made accessible via the corresponding ``name`` attribute.
+        """Import spatstat subpackages or extensions given by ``names``, made accessible via the corresponding ``.name`` attribute.
         If the package is already present is it updated according to ``update`` otherwise it is installed.
 
-        :param update: Install latest version of the corresponding package (internet access required), defaults to True
-        :type update: bool, optional
+        The list of subpackages and extensions is available
 
-        .. note::
+        - via the attributes :py:attr:`~spatstat_interface.interface.SpatstatInterface.SUBPACKAGES` and :py:attr:`~spatstat_interface.interface.SpatstatInterface.EXTENSIONS`
+        - at `github.com/spatstat <https://github.com/spatstat/spatstat>`_
 
-            As mentioned on `github.com/spatstat <https://github.com/spatstat/spatstat>`_, when ``spatstat`` is installed all subpackages will automatically be installed.
-            On the contrary ``spatstat`` extensions must be installed separately.
+        .. code-block:: python
+
+            spatstat = SpatstatInterface(update=True)
+            spatstat.import_package("core", "geom", update=True)
+            spatstat.core  # .your_favorite_function from spatstat.core
+            spatstat.geom  # .your_favorite_function from spatstat.geom
 
         .. seealso::
 
-            The list of ``spatstat`` subpackages and extensions is available at `github.com/spatstat <https://github.com/spatstat/spatstat>`_
+            :py:meth:`~spatstat_interface.utils.install_r_package`
         """
         self.check_package_name(*names)
         spatstat = "spatstat"
@@ -49,15 +57,15 @@ class SpatstatInterface:
             setattr(self, name, rpackages.importr(pkg))
 
     def check_package_name(self, *names):
-        """Check whether ``names`` are valid ``spatstat`` subpackages or extension.
+        """Check whether ``names`` are valid ``spatstat`` subpackages or extensions. The list of subpackages and extensions is available
 
-        :raises ValueError: if some names are invalid.
+        - via the attributes :py:attr:`~spatstat_interface.interface.SpatstatInterface.SUBPACKAGES` and :py:attr:`~spatstat_interface.interface.SpatstatInterface.EXTENSIONS`
+        - at `github.com/spatstat <https://github.com/spatstat/spatstat>`_
 
-        .. seealso::
+        .. code-block:: python
 
-            The list of subpackages and extensions is available
-            - via the ``SUBPACKAGES`` and ``EXTENSIONS`` attributes
-            - at `github.com/spatstat <https://github.com/spatstat/spatstat>`_
+            spatstat = SpatstatInterface(update=True)
+            spatstat.check_package_name("core", "geom")
         """
         wrong_names = set(names).difference(self.SUBPACKAGES + self.EXTENSIONS)
         if wrong_names:

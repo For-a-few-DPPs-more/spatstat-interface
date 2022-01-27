@@ -5,15 +5,13 @@ from rpy2.robjects.conversion import localconverter
 
 
 def install_r_package(*names, update=True):
-    """Install ``R`` package(s) passed via ``names``.
-    If the corresponding package(s) is already installed it is updated (latest version) according to ``update``, otherwise it installed (latest version).
+    """Install ``R`` package(s) passed via ``names``, using `rpy2.robjects.packages.importr <https://rpy2.github.io/doc/latest/html/robjects_rpackages.html?highlight=importr#rpy2.robjects.packages.importr>`_.
+
+    If the corresponding package is already installed it is updated (latest version) according to ``update``, otherwise it is installed (latest version).
 
     .. code-block:: python
 
-        install_r_package("spatstat", ..., update=True)
-
-    :param update: trigger installation of the latest version of the package, defaults to True
-    :type update: bool, optional
+        install_r_package("spatstat.core", "spatstat.geom", update=True)
     """
     utils = rpackages.importr("utils")
     for name in names:
@@ -25,11 +23,7 @@ def install_r_package(*names, update=True):
 
 
 def to_pandas_data_frame(r_data_frame):
-    """`Convert R DataFrame to pandas DataFrame using rpy2 <https://rpy2.github.io/doc/latest/html/pandas.html>`_
-
-    :param r_data_frame: R DataFrame
-    :return: pandas DataFrame created from ``r_data_frame``
-    """
+    """Convert the R DataFrame ``r_data_frame`` object to a ``pandas.DataFrame`` object `using rpy2 <https://rpy2.github.io/doc/latest/html/pandas.html>`_."""
     with localconverter(robjects.default_converter + pandas2ri.converter):
         pandas_df = robjects.conversion.rpy2py(r_data_frame)
         return pandas_df
