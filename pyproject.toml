@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "spatstat-interface"
-version = "0.1.1"
+version = "0.1.2"
 description = "Simple Python interface with the spatstat R package using rpy2"
 license = "MIT"
 authors = ["Guillaume Gautier <guillaume.gga@gmail.com>"]
