@@ -13,11 +13,11 @@
       - [Using `poetry`](#using-poetry)
       - [Using `pip`](#using-pip)
   - [Documentation](#documentation)
-    - [Main ressources](#main-ressources)
+    - [Main resources](#main-resources)
     - [Notes about `spatstat`](#notes-about-spatstat)
-    - [Notes about calling functions](#notes-about-calling-functions)
+    - [Calling functions](#calling-functions)
       - [Calling function.variant](#calling-functionvariant)
-      - [Using keyword arguments](#using-keyword-arguments)
+      - [Keyword arguments](#keyword-arguments)
 
 Simple Python interface with the spatial statistics [R](https://www.r-project.org/) package [`spatstat`](https://github.com/spatstat/spatstat) using [`rpy2`](https://github.com/rpy2/rpy2).
 
@@ -28,7 +28,7 @@ Simple Python interface with the spatial statistics [R](https://www.r-project.or
 
   ```toml
   [tool.poetry.dependencies]
-  python = "^3.8"
+  python = "^3.7.1"
 
   matplotlib = "^3.4.2"
   numpy = "^1.20.3"
@@ -119,7 +119,7 @@ Alternatives
 
 ## Documentation
 
-### Main ressources
+### Main resources
 
 - [`notebooks`](./notebooks) showcase detailed examples
 - [`rpy2` documentation](https://rpy2.github.io/doc.html)
@@ -132,7 +132,7 @@ The [`spatstat`](https://github.com/spatstat/spatstat) package has recently been
 Using `spatstat-interface`, sub-packages and extensions are accessible in the following way
 
 ```python
-from spatstat_interface import SpatstatInterface
+from spatstat_interface.interface import SpatstatInterface
 
 spatstat = SpatstatInterface(update=True)
 # spatstat.core is None
@@ -144,23 +144,25 @@ spatstat.core
 spatstat.geom
 ```
 
-### Notes about calling functions
+### Calling functions
 
 #### Calling function.variant
 
-Instead of calling `function.variant` as in R replace `.` by `_` in Python.
+To call the R `function.variant`
 
 ```R
 # R code pcf.ppp
 spatstat.core::pcf.ppp(X)
 ```
 
+Replace `.` by `_` to call `function_variant` in Python
+
 ```Python
 # Python code pcf_ppp
-my_dpp = spatstat.core.pcf_ppp(X)
+spatstat.core.pcf_ppp(X)
 ```
 
-#### Using keyword arguments
+#### Keyword arguments
 
 Consider using Python dictionaries to pass keyword arguments.
 Below are a few examples.
@@ -175,10 +177,10 @@ Below are a few examples.
   ```Python
   # Python code
   params = {"kernel": "epanechnikov", "var.approx": False}
-  my_dpp = spatstat.core.pcf_pp(X, **params)
+  spatstat.core.pcf_pp(X, **params)
   ```
 
-- reserved keywords, for example `lambda` is a reserved Python keyword ; it can't be used as a keyword argument
+- reserved keywords, for example `lambda` is a reserved Python keyword; it can't be used as a keyword argument
 
   ```R
   # R code
@@ -188,5 +190,5 @@ Below are a few examples.
   ```Python
   # Python code
   params = {"lambda": rho, "alpha": alpha, "d": d}
-  my_dpp = spatstat.core.dppGauss(**params)
+  spatstat.core.dppGauss(**params)
   ```
