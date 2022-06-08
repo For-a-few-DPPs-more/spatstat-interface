@@ -9,7 +9,7 @@ build-backend = "poetry.core.masonry.api"
 # Setuptools
 [project]
 name = "spatstat-interface"
-version = "0.1.2"
+version = "0.1.3"
 description = "Simple Python interface with the spatstat R package using rpy2"
 license = { file = "LICENSE" }
 authors = [
@@ -50,7 +50,7 @@ documentation = "https://github.com/For-a-few-DPPs-more/spatstat-interface" # ur
 # POETRY
 [tool.poetry]
 name = "spatstat-interface"
-version = "0.1.2"
+version = "0.1.3"
 description = "Simple Python interface with the spatstat R package using rpy2"
 license = "MIT"
 authors = ["Guillaume Gautier <guillaume.gga@gmail.com>"]
