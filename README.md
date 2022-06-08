@@ -30,8 +30,6 @@ Simple Python interface with the spatial statistics [R](https://www.r-project.or
   [tool.poetry.dependencies]
   python = "^3.7.1"
 
-  matplotlib = "^3.4.2"
-  numpy = "^1.20.3"
   pandas = "^1.2.4"
   rpy2 = "^3.4.5"
   ```
@@ -93,29 +91,22 @@ poetry install
 
 #### Using `pip`
 
-For now, packages defined only by a [`pyproject.toml`](./pyproject.toml) file **can't be installed editable mode directly** using `pip`.
+Modify the `[build-system]` section in [`pyproject.toml`](./pyproject.toml) to
 
-Alternatives
+```toml
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+```
 
-1. consider [using `poetry` instead](#using-poetry)
+Install the project in editable mode
 
-2. otherwise, for your convenience, the [`pyproject.toml`](./pyproject.toml) file was duplicated into a [`setup.cfg`](./setup.cfg) file to enable editable install using `pip`.
-
-   - modify the `[build-system]` section in [`pyproject.toml`](./pyproject.toml) to
-
-      ```toml
-      [build-system]
-      requires = ["setuptools >= 40.9.0", "wheel"]
-      build-backend = "setuptools.build_meta"
-      ```
-
-   - intstall the project in editable mode
-
-      ```bash
-      cd spatstat-interface
-      # activate your virtual environment and run
-      pip install -e .
-      ```
+```bash
+cd spatstat-interface
+# activate your virtual environment and run
+pip install -e .
+# pip install -e ".[dev]" to install development dependencies
+```
 
 ## Documentation
 
