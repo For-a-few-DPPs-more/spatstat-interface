@@ -955,6 +955,17 @@ toml = "*"
 testing = ["fields", "hunter", "process-tests", "six", "pytest-xdist", "virtualenv"]
 
 [[package]]
+name = "pytest-faulthandler"
+version = "2.0.1"
+description = "py.test plugin that activates the fault handler module for tests (dummy package)"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pytest = ">=5.0"
+
+[[package]]
 name = "python-dateutil"
 version = "2.8.2"
 description = "Extensions to the standard Python datetime module"
@@ -1281,7 +1292,7 @@ notebook = ["jupyter"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.1"
-content-hash = "14edda52c340e7969985db5f9e5583ffd8b10724614c7a33d42d31a0947b85e9"
+content-hash = "e6045e3e7424008dc23a70e9e15c551403ca3193013a82ef057d7eb9f8387666"
 
 [metadata.files]
 appnope = [
@@ -1927,6 +1938,10 @@ pytest = [
 pytest-cov = [
     {file = "pytest-cov-2.12.1.tar.gz", hash = "sha256:261ceeb8c227b726249b376b8526b600f38667ee314f910353fa318caa01f4d7"},
     {file = "pytest_cov-2.12.1-py2.py3-none-any.whl", hash = "sha256:261bb9e47e65bd099c89c3edf92972865210c36813f80ede5277dceb77a4a62a"},
+]
+pytest-faulthandler = [
+    {file = "pytest-faulthandler-2.0.1.tar.gz", hash = "sha256:ed72bbce87ac344da81eb7d882196a457d4a1026a3da4a57154dacd85cd71ae5"},
+    {file = "pytest_faulthandler-2.0.1-py2.py3-none-any.whl", hash = "sha256:236430ba962fd1c910d670922be55fe5b25ea9bc3fc6561a0cafbb8759e7504d"},
 ]
 python-dateutil = [
     {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},

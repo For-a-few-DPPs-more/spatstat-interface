@@ -10,7 +10,7 @@ class SpatstatInterface:
 
     .. code-block:: python
 
-        spatstat = SpatstatInterface(update=True)
+        spatstat = SpatstatInterface()
         # spatstat.core is None
         # spatstat.geom is None
         # ...
@@ -21,15 +21,19 @@ class SpatstatInterface:
     SUBPACKAGES = ("core", "data", "geom", "linnet", "sparse", "spatstat", "utils")
     EXTENSIONS = ("gui", "Knet", "local", "sphere")
 
-    def __init__(self, update=True):
-        """Construct an interface with the ``spatstat`` R package `github.com/spatstat <https://github.com/spatstat/spatstat>`_.
-        If ``spatstat`` is already installed it is updated (latest version) according to ``update``, otherwise it is installed (latest version).
+    def __init__(self, update=False):
+        """Initialize the interface with the ``spatstat`` R package `github.com/spatstat <https://github.com/spatstat/spatstat>`_.
+
+        Attributes associated with the corresponding subpackages and extensions and initialized to None.
+
+        .. note::
+
+            The ``update`` argument has no effect, it is just kept for retro-compatibility.
         """
-        install_r_package("spatstat", update=update)
         for pkg in self.SUBPACKAGES + self.EXTENSIONS:
             setattr(self, pkg, None)
 
-    def import_package(self, *names, update=True):
+    def import_package(self, *names, update=False):
         """Import spatstat subpackages or extensions given by ``names``, made accessible via the corresponding ``.name`` attribute.
         If the package is already present is it updated according to ``update`` otherwise it is installed.
 
@@ -40,8 +44,8 @@ class SpatstatInterface:
 
         .. code-block:: python
 
-            spatstat = SpatstatInterface(update=True)
-            spatstat.import_package("core", "geom", update=True)
+            spatstat = SpatstatInterface()
+            spatstat.import_package("core", "geom", update=False)
             spatstat.core  # .your_favorite_function from spatstat.core
             spatstat.geom  # .your_favorite_function from spatstat.geom
 
@@ -64,7 +68,7 @@ class SpatstatInterface:
 
         .. code-block:: python
 
-            spatstat = SpatstatInterface(update=True)
+            spatstat = SpatstatInterface()
             spatstat.check_package_name("core", "geom")
         """
         wrong_names = set(names).difference(self.SUBPACKAGES + self.EXTENSIONS)

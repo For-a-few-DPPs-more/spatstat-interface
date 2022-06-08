@@ -2,15 +2,14 @@ import numpy as np
 import pandas as pd
 import pytest
 import rpy2.robjects as robjects
-
 from spatstat_interface.interface import SpatstatInterface
 from spatstat_interface.utils import to_pandas_data_frame
 
 
 @pytest.fixture
 def spatstat():
-    spatstat = SpatstatInterface(update=True)
-    spatstat.import_package("core", "geom", update=True)
+    spatstat = SpatstatInterface()
+    spatstat.import_package("core", "geom", update=False)
     return spatstat
 
 
