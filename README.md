@@ -134,7 +134,8 @@ Using `spatstat-interface`, sub-packages and extensions are accessible in the fo
 ```python
 from spatstat_interface.interface import SpatstatInterface
 
-spatstat = SpatstatInterface(update=True)
+spatstat = SpatstatInterface()
+# spatstat.spatstat is None
 # spatstat.core is None
 # spatstat.geom is None
 

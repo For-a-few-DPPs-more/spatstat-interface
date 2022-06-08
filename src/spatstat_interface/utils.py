@@ -4,14 +4,14 @@ from rpy2.robjects import pandas2ri
 from rpy2.robjects.conversion import localconverter
 
 
-def install_r_package(*names, update=True):
+def install_r_package(*names, update=False):
     """Install ``R`` package(s) passed via ``names``, using `rpy2.robjects.packages.importr <https://rpy2.github.io/doc/latest/html/robjects_rpackages.html?highlight=importr#rpy2.robjects.packages.importr>`_.
 
     If the corresponding package is already installed it is updated (latest version) according to ``update``, otherwise it is installed (latest version).
 
     .. code-block:: python
 
-        install_r_package("spatstat.core", "spatstat.geom", update=True)
+        install_r_package("spatstat.core", "spatstat.geom", update=False)
     """
     utils = rpackages.importr("utils")
     for name in names:
