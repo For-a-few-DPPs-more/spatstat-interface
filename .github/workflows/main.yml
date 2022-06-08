@@ -43,12 +43,8 @@ jobs:
           r-version: ${{ matrix.r-version }}
 
       - name: Install spatstat subpackages and extensions
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 2
-          extra-packages: |
-            any::spatstat.core
-            any::spatstat.geom
+        run:
+          Rscript -e 'install.packages(c("spatstat.core", "spatstat.geom"))'
           # ! spatstat.core is to be replaced by
           # ! spatstat.model + spatstat.explore
           # https://github.com/spatstat/spatstat
