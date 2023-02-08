@@ -116,12 +116,14 @@ from spatstat_interface.interface import SpatstatInterface
 
 spatstat = SpatstatInterface()
 # spatstat.spatstat is None
-# spatstat.core is None
+# spatstat.model is None
+# spatstat.explore is None
 # spatstat.geom is None
 
 # load/import sub-packages or extensions
-spatstat.import_package("core", "geom", update=True)
-spatstat.core
+spatstat.import_package("model", "explore", "geom", update=True)
+spatstat.model
+spatstat.explore
 spatstat.geom
 ```
 
@@ -133,14 +135,14 @@ To call the R `function.variant`
 
 ```R
 # R code pcf.ppp
-spatstat.core::pcf.ppp(X)
+spatstat.explore::pcf.ppp(X)
 ```
 
 Replace `.` by `_` to call `function_variant` in Python
 
 ```Python
 # Python code pcf_ppp
-spatstat.core.pcf_ppp(X)
+spatstat.explore.pcf_ppp(X)
 ```
 
 #### Keyword arguments
@@ -152,24 +154,24 @@ Below are a few examples.
 
   ```R
   # R code
-  spatstat.core::pcf.ppp(X, kernel="epanechnikov", var.approx=False)
+  spatstat.explore::pcf.ppp(X, kernel="epanechnikov", var.approx=False)
   ```
 
   ```Python
   # Python code
   params = {"kernel": "epanechnikov", "var.approx": False}
-  spatstat.core.pcf_pp(X, **params)
+  spatstat.explore.pcf_ppp(X, **params)
   ```
 
 - reserved keywords, for example `lambda` is a reserved Python keyword; it can't be used as a keyword argument
 
   ```R
   # R code
-  spatstat.core::dppGauss(lambda=rho, alpha=alpha, d=d)
+  spatstat.model::dppGauss(lambda=rho, alpha=alpha, d=d)
   ```
 
   ```Python
   # Python code
   params = {"lambda": rho, "alpha": alpha, "d": d}
-  spatstat.core.dppGauss(**params)
+  spatstat.model.dppGauss(**params)
   ```

@@ -11,14 +11,13 @@ class SpatstatInterface:
     .. code-block:: python
 
         spatstat = SpatstatInterface()
-        # spatstat.core is None
         # spatstat.geom is None
         # ...
 
     See :py:meth:`~spatstat_interface.interface.SpatstatInterface.import_package` to load/import the corresponding subpackages/extensions.
     """
 
-    SUBPACKAGES = ("core", "data", "geom", "linnet", "sparse", "spatstat", "utils")
+    SUBPACKAGES = ("data", "explore", "geom", "linnet", "model", "random", "sparse", "spatstat", "utils")
     EXTENSIONS = ("gui", "Knet", "local", "sphere")
 
     def __init__(self, update=False):
@@ -45,8 +44,8 @@ class SpatstatInterface:
         .. code-block:: python
 
             spatstat = SpatstatInterface()
-            spatstat.import_package("core", "geom", update=False)
-            spatstat.core  # .your_favorite_function from spatstat.core
+            spatstat.import_package("model", "geom", update=False)
+            spatstat.model  # .your_favorite_function from spatstat.model
             spatstat.geom  # .your_favorite_function from spatstat.geom
 
         .. seealso::
@@ -69,7 +68,7 @@ class SpatstatInterface:
         .. code-block:: python
 
             spatstat = SpatstatInterface()
-            spatstat.check_package_name("core", "geom")
+            spatstat.check_package_name("model", "geom")
         """
         wrong_names = set(names).difference(self.SUBPACKAGES + self.EXTENSIONS)
         if wrong_names:

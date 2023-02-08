@@ -11,15 +11,13 @@ def install_r_package(*names, update=False):
 
     .. code-block:: python
 
-        install_r_package("spatstat.core", "spatstat.geom", update=False)
+        install_r_package("spatstat.model", "spatstat.geom", update=False)
     """
     utils = rpackages.importr("utils")
     for name in names:
-        if rpackages.isinstalled(name) and not update:
-            continue
-        # Choose mirror (internet access required) if update = True
-        utils.chooseCRANmirror(ind=1)
-        utils.install_packages(name)
+        if update or not rpackages.isinstalled(name):
+            utils.chooseCRANmirror(ind=1)  # internet access required
+            utils.install_packages(name)
 
 
 def to_pandas_data_frame(r_data_frame):
