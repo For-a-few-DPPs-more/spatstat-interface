@@ -10,8 +10,8 @@
   - [Installation](#installation)
     - [Install the project as a dependency](#install-the-project-as-a-dependency)
     - [Install in editable mode and potentially contribute to the project](#install-in-editable-mode-and-potentially-contribute-to-the-project)
-      - [Using `poetry`](#using-poetry)
-      - [Using `pip`](#using-pip)
+      - [Editable install with `poetry`](#editable-install-with-poetry)
+      - [Editable install with `pip`](#editable-install-with-pip)
   - [Documentation](#documentation)
     - [Main resources](#main-resources)
     - [Notes about `spatstat`](#notes-about-spatstat)
@@ -23,16 +23,10 @@ Simple Python interface with the spatial statistics [R](https://www.r-project.or
 
 ## Dependencies
 
-- [R](https://www.r-project.org/) (programming language),
-- Python dependencies are listed in the [`pyproject.toml`](./pyproject.toml) file. Note that they mostly correspond to the latest version.
-
-  ```toml
-  [tool.poetry.dependencies]
-  python = "^3.7.1"
-
-  pandas = "^1.2.4"
-  rpy2 = "^3.4.5"
-  ```
+- [R](https://www.r-project.org/) (programming language)
+  - [`spatstat`](https://github.com/spatstat/spatstat) package, which [has recently been split into multiple sub-packages and extensions](https://github.com/spatstat/spatstat#spatstat-has-been-split-into-a-family-of-packages). **Warning: potential new splits may break your code!**
+- Python >= 3.7, with dependencies listed in the [`pyproject.toml`](./pyproject.toml) file. Note that they mostly correspond to the latest version.
+  - non-optional dependencies are [`pandas`](https://pandas.pydata.org/) and [`rpy2`](https://rpy2.github.io/).
 
 ## Installation
 
@@ -74,39 +68,33 @@ In any case, your can clone the repository
   git clone https://github.com/For-a-few-DPPs-more/spatstat-interface.git
   ```
 
-#### Using `poetry`
+#### Editable install with `poetry`
 
 The package can be installed in **editable** mode along with
 
 - main (non-optional) dependencies, see `[tool.poetry.dependencies]` in [`pyproject.toml`](./pyproject.toml)
-- development dependencies, `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](./pyproject.toml)
+- development dependencies, `[tool.poetry.group.dev.dependencies]` in [`pyproject.toml`](./pyproject.toml)
 
 ```bash
 cd spatstat-interface
-# activate your virtual environment or run
 # poetry shell  # to create/activate local .venv (see poetry.toml)
 poetry install
-# poetry install --no-dev  # to avoid installing the development dependencies
+# poetry install --with dev
+# poetry install --with dev --extras "notebook"
 ```
 
-#### Using `pip`
+#### Editable install with `pip`
 
-Modify the `[build-system]` section in [`pyproject.toml`](./pyproject.toml) to
-
-```toml
-[build-system]
-requires = ["setuptools", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
-```
-
-Install the project in editable mode
+Consider using [`pip>=21.3.1`](https://pip.pypa.io/en/stable/news/#v21-3-1), when installing packages defined by a `pyproject.toml` file.
 
 ```bash
 cd spatstat-interface
 # activate your virtual environment and run
-pip install -e .
-# pip install -e ".[dev]" to install development dependencies
+pip install --editable .
+# pip install --editable ".[notebook]" to install notebook dependencies
 ```
+
+See also the [`pip install`](https://pip.pypa.io/en/stable/cli/pip_install/) optional commands.
 
 ## Documentation
 
@@ -118,7 +106,8 @@ pip install -e .
 
 ### Notes about `spatstat`
 
-The [`spatstat`](https://github.com/spatstat/spatstat) package has recently been split into multiple sub-packages and extensions.
+The [`spatstat`](https://github.com/spatstat/spatstat) package [has recently been split into multiple sub-packages and extensions](https://github.com/spatstat/spatstat#spatstat-has-been-split-into-a-family-of-packages).
+**Warning: potential new splits may break your code!**
 
 Using `spatstat-interface`, sub-packages and extensions are accessible in the following way
 
