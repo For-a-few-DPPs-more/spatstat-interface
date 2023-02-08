@@ -44,9 +44,7 @@ jobs:
 
       - name: Install spatstat subpackages and extensions
         run:
-          Rscript -e 'install.packages(c("spatstat.core", "spatstat.geom"))'
-          # ! spatstat.core is to be replaced by
-          # ! spatstat.model + spatstat.explore
+          Rscript -e 'install.packages(c("spatstat.model", "spatstat.explore", "spatstat.geom"))'
           # https://github.com/spatstat/spatstat
 
       #----------------------------------------------
@@ -81,7 +79,7 @@ jobs:
       # install your root project, if required
       #----------------------------------------------
       - name: Install package
-        run: poetry install
+        run: poetry install --with dev
 
       #----------------------------------------------
       #    run test suite and output coverage file
